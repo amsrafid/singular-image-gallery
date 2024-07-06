@@ -12,7 +12,7 @@ To install this package, include **_plugin.singular-image-gallery.css_** to acti
 - js/plugin.singular-image-gallery.js
 - css/plugin.singular-image-gallery.css
 
-Then in markup, needs js and css files to be added like bellow,
+Then in markup, needs js and css files to be added like bellow:
 
 ~~~html
 <head>
@@ -30,7 +30,7 @@ Then in markup, needs js and css files to be added like bellow,
 
 ## Basic Use
 
-It's very easy to use. Just initiate the gallery instance and pass data in the defined json format from backend like bellow,
+It's very easy to use. Just initiate the gallery instance and pass data in the defined json format from backend like bellow:
 
 ~~~javascript
 new SingularImageGallery(
@@ -40,14 +40,34 @@ new SingularImageGallery(
 )
 ~~~
 
-Backend needs to pass data in the bellow format as a response,
+Backend needs to pass data in the bellow format as a response:
 
-~~~json
+~~~javascript
 {
     "page": 0,          // Number of current page
     "totalPage": 0,     // Total number of pages that dependents with the offset of paginating 
     "totalImage": 0,    // Total number of images can be shown to the full process
     "images": []        // Array containing string of the full path images
+}
+~~~
+
+## Options
+
+Here are the available options to modify the action of the plugin, with the default values listed below:
+
+~~~javascript
+{
+    iconLeft: "icons/icon-left.svg",
+    iconRight: "icons/icon-right.svg",
+    iconCross: "icons/icon-cross.svg",
+    iconLoader: "icons/icon-loader.svg",
+    closeAnimation: "__close-animation",
+    openAnimation: "__open-animation",
+    animationDuration: 650,
+    transitionError: 0,
+    transitionRatio: 0.4,
+    paginationOffset: 10,
+    showCounts: true,
 }
 ~~~
 
