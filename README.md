@@ -57,16 +57,69 @@ Here are the available options to modify the action of the plugin, with the defa
 
 ~~~javascript
 {
+    /**
+     * The path of the svg image which indicates the previous image.
+     */
     iconLeft: "icons/icon-left.svg",
+
+    /**
+     * The path of the svg image which indicates the next image.
+     */
     iconRight: "icons/icon-right.svg",
+
+    /**
+     * The path of the svg image which indicates the close action.
+     */
     iconCross: "icons/icon-cross.svg",
+
+    /**
+     * The path of the svg image which indicates the loader image.
+     */
     iconLoader: "icons/icon-loader.svg",
+
+    /**
+     * This is the name of an animation that is the identifier of a css animation keyframes.
+     * Like, 
+     * .class { animation-name: {IDENTIFIER} }
+     * @keyframes {IDENTIFIER} { ... }
+     */
     closeAnimation: "__close-animation",
+
+    /**
+     * This is the name of an animation that is the identifier of a css animation keyframes.
+     * Like, 
+     * .class { animation-name: {IDENTIFIER} }
+     * @keyframes {IDENTIFIER} { ... }
+     */
     openAnimation: "__open-animation",
+
+    /**
+     * An integer value in milliseconds for the working time of an animation specifies how long the animation should run.
+     * In one word it's the animation duration.
+     * For image changing animation, it works with two divided parts.
+     */
     animationDuration: 650,
+
+    /**
+     * An integer value in milliseconds used to modify the duration of an animation at the end
+     * Typically refers to how long the animation should extend or reduce beyond its initially specified duration.
+     */
     transitionError: 0,
+
+    /**
+     * When dealing with photo transitions divided into two parts,
+     * the ratio defines how the transition time is distributed between the two actions.
+     */
     transitionRatio: 0.4,
+
+    /**
+     * The number of image files that should be parsed from the backend in a single API call
+     */
     paginationOffset: 10,
+
+    /**
+     * Image counting badge will be shown or not.
+     */
     showCounts: true,
 }
 ~~~
