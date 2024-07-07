@@ -62,7 +62,7 @@ function SingularImageGallery(el, url, options)
     /**
      * Initiate plugin necessary elements and events
      * 
-     * @return void
+     * @return {void}
      */
     this.init = () => {
         if (typeof el === 'string') {
@@ -83,7 +83,7 @@ function SingularImageGallery(el, url, options)
     /**
      * Initiates system necessary helpers
      * 
-     * @return void
+     * @return {void}
      */
     this.initiateHelper = () => {
         this.iconLoader.hide = () => Style.hide(this.iconLoader);
@@ -93,7 +93,7 @@ function SingularImageGallery(el, url, options)
     /**
      * Initiates system necessary events
      * 
-     * @return void
+     * @return {void}
      */
     this.initiateEvents = () => {
         this.options.el.addEventListener('click', this.elementClick);
@@ -109,7 +109,7 @@ function SingularImageGallery(el, url, options)
     /**
      * Initiates system required DOM elements to generate markup
      * 
-     * @return void
+     * @return {void}
      */
     this.initiateDOMElement = () => {
         let leftIcon = document.createElement("img");
@@ -158,7 +158,7 @@ function SingularImageGallery(el, url, options)
     /**
      * Show Gallery images by handling API calling
      * 
-     * @return void
+     * @return {void}
      */
     this.showImage = async () => {
         this.iconLoader.show();
@@ -172,7 +172,7 @@ function SingularImageGallery(el, url, options)
     /**
      * Fetch data and assign necessary values to the system
      * 
-     * @returns void
+     * @returns {void}
      */
     this.fetchData = async () => {
         if (this.currentIndex < this.data.images.length - 1
@@ -202,7 +202,7 @@ function SingularImageGallery(el, url, options)
     /**
      * Assign image to show
      * 
-     * @return void
+     * @return {void}
      */
     this.assignImage = () => {
         if (this.data.images[this.currentIndex] === undefined) {
@@ -228,7 +228,7 @@ function SingularImageGallery(el, url, options)
     /**
      * Handle navigation button display
      * 
-     * @return void
+     * @return {void}
      */
     this.handleNavigationBtnDisplay = () => {
         if (this.currentIndex >= this.data.totalImage - 1) {
@@ -243,16 +243,22 @@ function SingularImageGallery(el, url, options)
     /**
      * Cross button Click event
      * 
-     * @return void
+     * @return {void}
      */
-    this.iconCrossClick = () => {
+    this.iconCrossClick = async () => {
+        this.parentDiv.classList.remove("__open-gallery");
+        this.parentDiv.classList.add("__close-gallery");
+
+        await new Promise(resolve => setTimeout(resolve, this.calculateAnimationError(300, true)));
+
         Style.hide(this.parentDiv);
+        this.parentDiv.classList.remove("__close-gallery");
     }
 
     /**
      * Left Button Click to view previous image
      * 
-     * @return void
+     * @return {void}
      */
     this.iconLeftClick = () => {
         if (this.currentIndex > 0) {
@@ -266,7 +272,7 @@ function SingularImageGallery(el, url, options)
     /**
      * Right Button Click to view next image
      * 
-     * @return void
+     * @return {void}
      */
     this.iconRightClick = () => {
         if (this.currentIndex < this.data.totalImage - 1) {
@@ -282,7 +288,7 @@ function SingularImageGallery(el, url, options)
      * Which will trigger the plugin to react from starting
      * 
      * @param {MouseEvent} e 
-     * @returns 
+     * @returns {void}
      */
     this.elementClick = (e) => {
         e.preventDefault();
@@ -291,7 +297,24 @@ function SingularImageGallery(el, url, options)
             return;
         }
 
+        this.parentDiv.classList.add("__open-gallery");
         Style.show(this.parentDiv);
+    }
+
+    /**
+     * Calculate animation duration
+     * @param {int} duration 
+     * @param {boolean} isSubstituting      Default false
+     * @return {int}
+     */
+    this.calculateAnimationError = (duration, isSubstituting = false) => {
+        let error = duration < 400 ? 15 : 10;
+
+        if (isSubstituting) {
+            return duration - error;
+        }
+
+        return error;
     }
 
     /**
@@ -302,14 +325,14 @@ function SingularImageGallery(el, url, options)
      * @param {int} duration 
      * @param {Function} callback 
      * @param {int} delay 
-     * @return void
+     * @return {void}
      */
     this.animate = async (ctx, keyFrame, duration, callback = () => {}, delay) => {
         if (delay) {
             await new Promise(resolve => setTimeout(resolve, delay));
         }
 
-        let error = this.options.transitionError || duration < 400 ? 15 : 10;
+        let error = this.options.transitionError || this.calculateAnimationError(duration);
 
         Object.assign(ctx.style, {
             animationName: keyFrame,

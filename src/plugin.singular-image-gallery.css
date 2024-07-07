@@ -24,6 +24,19 @@
     border-radius: 50px; margin: 20px;
 }
 
+.__open-gallery { animation-name: __open-gallery; animation-duration: 300ms; }
+.__close-gallery { animation-name: __close-gallery; animation-duration: 300ms; }
+
+@keyframes __open-gallery {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes __close-gallery {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
 @keyframes __close-animation {
     0% { left: 0px; opacity: 1; transform: scale(1); }
     100% { left: -50px; opacity: 0; transform: scale(0.98); }
